@@ -16,10 +16,13 @@ class BlogFeed
 {
     var $posts = array();
 	var $type = "";
+	var $feed = "";
+	var $x = "";
 
-    function __construct($file_or_url,$type_param)
+    function __construct($file_or_url,$type_param,$title_param)
     {
     	$type = $type_param;
+		$feed = $title_param;
         $file_or_url = $this->resolveFile($file_or_url);
         if (!($x = simplexml_load_file($file_or_url)))
             return;
@@ -50,12 +53,12 @@ class BlogFeed
 				foreach ($x->entry as $item)
 				        {
 				        	$post = new BlogPost();
+							$post->feed = $feed;
 							$post->id  = (string) $item->id;
 				            $post->date  = (string) $item->updated;
 				            $post->ts    = strtotime($item->updated);
 				            $post->link  = (string) $item->link['href'];
 				            $post->title = (string) $item->title;
-				            ;
 				            $post->text  = (string) $item->content;
 				
 				            // Create summary as a shortened body and remove images, 

@@ -17,7 +17,8 @@ class BlogFeed
     var $posts = array();
 	var $type = "";
 	var $feed = "";
-	var $x = "";
+	//var $x = 
+	//var $x::SimpleXMLElement();
 
     function __construct($file_or_url,$type_param,$title_param)
     {
@@ -30,8 +31,7 @@ class BlogFeed
 			case 'rss':
 				foreach ($x->channel->item as $item)
 				        {
-        	
-				        	echo 'antesblog='.$post->title;
+ 				        	echo 'antesblog='.$post->title;
 				            $post = new BlogPost();
 							echo 'despues='.$post->title;
 				            $post->date  = (string) $item->pubDate;

@@ -60,13 +60,17 @@ switch ($ca['title']) {
 				syslog(LOG_INFO,count($bf->posts)." new blog posts, iterating ...");			
 				foreach($bf->posts as $post) {
 					//database exists'
+					
 					if (false) {
 						//syslog(LOG_DEBUG,"Next...post exists in db: (feed;id)(".$post->feed.";".$post->id.")");
 					} else {
 						//insert database
 						//syslog(LOG_INFO,"Inserted post ".$post->feed." ".$post->id);
 						if (preg_match("#\bforecast\b#", $post->title)) {
-							//echo 'parseamos';
+							syslog(LOG_INFO,"Parsing signal of post ".$post->id."...");
+							$signals = New Parse($post->text);
+							echo "signals=".$signals->output ;
+							
 						} else {
 							syslog(LOG_WARNING,"Title don't match ".$post->feed." ".$post->id." ".$post->title);
 							//send mail to evaluate?
